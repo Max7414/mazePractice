@@ -37,14 +37,14 @@ public class m3m3 {
 		Queue<Point> q = new LinkedList<Point>();
 		Stack<Point> s = new Stack<Point>();
 		q.add(new Point(1, 1));
-		visited[1][1] =1;
-		int destX = n-2;
-		int destY = n-2;
+		visited[1][1] = 1;
+		int destX = n - 2;
+		int destY = n - 2;
 
 		while (!q.isEmpty()) {
 			Point p = q.poll();
 			s.add(p);
-			if (maze[p.x][p.y + 1] == 1 && p.y + 1 > 0 && visited[p.x][p.y + 1]!=1) {
+			if (maze[p.x][p.y + 1] == 1 && p.y + 1 > 0 && visited[p.x][p.y + 1] != 1) {
 				q.add(new Point(p.x, p.y + 1));
 				// s.add(new Point(p.x,p.y+1));
 				visited[p.x][p.y + 1]++;
@@ -53,7 +53,7 @@ public class m3m3 {
 					break;
 
 			}
-			if (maze[p.x][p.y - 1] == 1 && p.y - 1 > 0 && visited[p.x][p.y - 1]!=1) {
+			if (maze[p.x][p.y - 1] == 1 && p.y - 1 > 0 && visited[p.x][p.y - 1] != 1) {
 				q.add(new Point(p.x, p.y - 1));
 				// s.add(new Point(p.x,p.y-1));
 				visited[p.x][p.y - 1]++;
@@ -61,7 +61,7 @@ public class m3m3 {
 				if (p.x == destX && p.y - 1 == destY)
 					break;
 			}
-			if (maze[p.x - 1][p.y] == 1 && p.x - 1 > 0 && visited[p.x - 1][p.y]!=1) {
+			if (maze[p.x - 1][p.y] == 1 && p.x - 1 > 0 && visited[p.x - 1][p.y] != 1) {
 				q.add(new Point(p.x - 1, p.y));
 				// s.add(new Point(p.x-1,p.y));
 				visited[p.x - 1][p.y]++;
@@ -69,11 +69,11 @@ public class m3m3 {
 				if (p.x - 1 == destX && p.y == destY)
 					break;
 			}
-			if (maze[p.x + 1][p.y] == 1 && p.x + 1 > 0 && visited[p.x + 1][p.y]!=1) {
+			if (maze[p.x + 1][p.y] == 1 && p.x + 1 > 0 && visited[p.x + 1][p.y] != 1) {
 				q.add(new Point(p.x + 1, p.y));
 				// s.add(new Point(p.x+1,p.y));
 				visited[p.x + 1][p.y]++;
-				
+
 				if (p.x + 1 == destX && p.y == destY)
 					break;
 
@@ -87,17 +87,18 @@ public class m3m3 {
 		System.out.println("x =" + route.x + " y =" + route.y);
 
 		while (!s.isEmpty()) {
-            Point route1 = s.pop();
-            if (((route.x == route1.x + 1) && (route.y == route1.y)) ||
-                ((route.x == route1.x - 1) && (route.y == route1.y)) ||
-                ((route.x == route1.x) && (route.y == route1.y - 1)) ||
-                ((route.x == route1.x) && (route.y == route1.y + 1))) {
-                System.out.println("x =" + route1.x + " y =" + route1.y);
-                length++;
-            }
-            route = route1;
-        }
-        System.out.println(length);
-    }
+			Point route1 = s.pop();
+			if ((route1.x == route.x && route1.y + 1 == route.y)
+					|| (route1.x == route.x && route1.y - 1 == route.y)
+					|| (route1.y == route.y && route1.x - 1 == route.x)
+					|| (route1.y == route.y && route1.x + 1 == route.x)) {
+				System.out.println("x =" + route1.x + " y =" + route1.y);
+				length++;
+				route = route1;
+				
+			} 
+		}
+		System.out.println(length+1);
+	}
 
 }
